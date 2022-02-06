@@ -39,7 +39,7 @@
 
 ```javascript
   const createSquares = (numberOfSquares) => {
-    for (let i = 0; i < NumberOfSquares; i++){
+    for (let i = 0; i < numberOfSquares; i++){
         const square = $('<div/>')
         $('.squares').append(square)
     }
@@ -61,7 +61,7 @@
 
 ```javascript
 const applyRandomColor = (square) => {
-  const randNum = Math.floor(Math.random() * 3) + 1
+  const randNum = Math.ceil(Math.random() * 3)
 
     if(randNum === 1) {
       square.css('background-color', 'red')
@@ -121,7 +121,7 @@ const handlePoke = (e) => {
 const handlePoke = (e) => {
     console.log(e.target)
     $(e.target).css('opacity', 0);
-    const color = $(e.currentTarget).css('background-color');
+    const color = $(e.target).css('background-color');
   };
 ```
 
@@ -140,22 +140,20 @@ const handlePoke = (e) => {
 ```javascript
 const checkValidPoke = (square) => {
   console.log(square, typeof square)
-  const colors = square.substring(4, square.length-1).split(" ");
-  const blue = parseInt(colors[2])
+  const colors = square.substring(4, square.length-1).split(", ");
+  const blue = colors[2];
 
-  if(blue === 255){
+  if(blue === '255'){
     score++;
-    console.log(score)
   } else {
     score--;
-    console.log(score)
   }
-
+  console.log(score)
 }
 ```
 
   - substring lets us take out part of a string.
-  - then we are splitting the string by the places so we can get an array number of strings then we are parsing the second index item in the newly created array because we only care about the blue value in rgb
+  - then we are splitting the string by the places so we can get an array number of strings then we access the second index item in the newly created array because we only care about the blue value in rgb
 
   - now where do we use this? 
 
@@ -179,12 +177,10 @@ const checkValidPoke = (square) => {
   if(blue === 255){
     console.log('this is passign')
     score++;
-    $('h1').text('scoreboard: ' + score)
   } else {
     score--;
-    $('h1').text('scoreboard: ' + score)
   }
-
+  $('h1').text('scoreboard: ' + score)
 }
 ```
 
@@ -198,28 +194,23 @@ let time = 30;
 let round = 1;
 ```
 
-- now try to write a function called `setTimer` thats starts an interval and countsdown to 0 and when it reaches 0 increase the round
+- now try to write a function called `updateTimer` thats countsdown to 0 and when it reaches 0 increase the round and restarts the time. Then let's call that function every second.
 
 ```javascript
-const setTimer = () => {
-  const timer = setInterval(()=>{
-    time--
-    if(time === 0){
-      clearInterval(timer)
-      round++;
-    }
+const updateTimer = () => {
+	time--;
+	$('#timer').text(`timer: ${time}s`);
+	if (time === 0) {
+		time = 30;
+		round += 1;
+		setUpRound();
+	}
+};
 
-    updateTime();
-
-  }, 1000)
-}
+setInterval(updateTimer, 1000);
 ```
 
-- clearInterval stops the interval saved in the variable `timer`.  The second arguement is the time in ms that the function in the first argument will run. 
-
-
 - Now write a function called setupRound, that will change the round number on the DOM and set up a new game, if we do this we can just call it in the button so we can reuse that button every round!
-
 
 ```javascript
  const setUpRound = () => {
@@ -228,18 +219,13 @@ const setTimer = () => {
 
     if(round === 1){
       createSquares(50);
-      time = 30;
     } else if(round === 2){
       createSquares(100);
-      time = 20;
     } else if(round === 3){
       createSquares(150);
-      time = 10;
     } else {
       createSquares(250);
-      time = 10;
     }
-
  }
 
 ```
@@ -251,8 +237,8 @@ const setTimer = () => {
 ```javascript
   $('button').on('click', () => {
 
-    setTimer();
-    setupRound();
+    setUpRound();
+    setInterval(updateTimer, 1000);
 
   })
 
@@ -265,7 +251,7 @@ ___
 
 ### Extras
 
-- So whats some add on we can make up and do together?
+- Make it so the user can lose the game if they don't click all of the blue squares.
 - Make the squares lose transparency during each round so you have to click faster.
 - Make a Modal to gather the players name at the beginning of the game, and leave them a greeting in the header
 - Can you refactor your code to encapsulate your methods and variables in an object
@@ -273,4 +259,4 @@ ___
 - Make a sound when you click a wrong one or a right one.
 - have a modal pop up at the begining of a ready so the user knows how to continue
 - make a section about how to play the game (how do you want to do that? an About page, in the header, a modal, idk???? anything you can imagine)
-- Anything you can imagine, any twist, any turn you like, USE USE USE your imagination in this, it will allow you to create worlds.
+- Anything you can imagine, any twist, any turn you like, USE USE USE your imagination in this, it will allow you to create worlds!
