@@ -96,14 +96,12 @@ const createSquares = (numberOfSquares) => {
 
 ```javascript
 const createSquares = (numberOfSquares) => {
-  for (let i = 0; i < numberOfSquares; i++){
-      const square = $('<div/>')
-
-      applyRandomColor(square);
-
-      $('.squares').append(square);
+   for (let i = 0; i < numberOfSquares; i++) {
+	const square = $('<div/>');
+	applyRandomColor(square);
+	square.on('click', handlePoke);
+	$('.squares').append(square);
    }
-  $('.squares').on('click', handlePoke);
 }
 
 
