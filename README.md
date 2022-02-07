@@ -7,18 +7,18 @@
 
 - The objective of our game is to click on as many blue squares as possible during the alloted time
 
-### User Stories/game logic
+### MVP User Stories
 
--  When the user clicks begin the timer should start, and the squares should populate with a random color
+https://www.atlassian.com/agile/project-management/user-stories
 
--  When the use clicks on a color the color should disapear, and score should be added or subtracted
+Summary: A user story is an informal, general explanation of a software feature written from the perspective of the end user. Its purpose is to articulate how a software feature will provide value to the customer.
 
-- When the round is over the scores round and time should be updated and the user should be able to start again with increased difficulty. 
+“As a [persona], I [want to], [so that].”
 
-
-### setup 
-
-- open up the `pokeAsquare` folder in student examples, and read over the code
+- As a user, I want the timer to start and the squares to populate when I click begin, so that I can start playing the game.
+- As a user, I want the score to increase or decrease when I click on a square, so that I can try to gain points.
+- As a user, I want the square I click on to disapear on click, so that I can't click it twice.
+- As a user, I want the timer to reset to 30 seconds and then board to fill with more squares when the timer reaches 0, so that I can play another round with increased difficulty.
 
 
 ### Let's begin 
