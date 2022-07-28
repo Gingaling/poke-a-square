@@ -9,26 +9,10 @@ console.log('Welcome to Poke-A-Square...');
 
 // When the round is over, the scores round and timer should be updated for the user to start over with increased difficulty.
 
-let time = 30;
-let round = 1;
-
-const setTimer = () => {
-	const timer = setInterval(() => {
-		time--;
-		if (time === 0) {
-			round++;
-			clearInterval(timer);
-			setUpRound();
-			setTimer();
-		}
-		updateTimer();
-	}, 1000);
-}
-
 $('button').on('click', () => {
-	createSquares(30);
-	setTimer();
+	// createSquares(30);
 	setUpRound();
+	setTimer();
 });
 
 const createSquares = numberOfSquares => {
@@ -46,7 +30,6 @@ const applyRandomColor = square => {
 	const idx = Math.ceil(Math.random() * 3);
 	return colors[idx];
 };
-
 
 $(".squares").on("click", ".square", e => {
 	handlePoke(e);
@@ -71,12 +54,37 @@ const checkValidPoke = squareColor => {
 	const blue = parseInt(colors[2]);
 	if (blue === 255) {
 		score++;
-		$('h1').text('scoreboard: ' + score);
+		$('#score').text('scoreboard: ' + score);
 	} else {
 		score--;
-		$('h1').text('scoreboard: ' + score);
+		$('#score').text('scoreboard: ' + score);
 	}
 };
+
+const gameOver = () => {
+	$('#gameName').text("Game Over");
+}
+
+let time = 30;
+let round = 1;
+
+const setTimer = () => {
+	const timer = setInterval(() => {
+		time--;
+		if (time === 0) {
+			round++;
+			if (round === 4) {
+				clearInterval(timer);
+				gameOver;
+				return;
+			}
+			clearInterval(timer);
+			setUpRound();
+			setTimer();
+		}
+		updateTimer();
+	}, 1000);
+}
 
 const updateTimer = () => {
 	const $timer = $("#timer");
@@ -94,6 +102,6 @@ const setUpRound = () => {
 		time = 20;
 	} else if (round >= 3) {
 		createSquares(150);
-		time = 10;
+		time = 20;
 	}
 };
