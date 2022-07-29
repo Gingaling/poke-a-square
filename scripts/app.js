@@ -75,7 +75,7 @@ const setTimer = () => {
 			round++;
 			if (round === 4) {
 				clearInterval(timer);
-				gameOver;
+				gameOver();
 				return;
 			}
 			clearInterval(timer);
