@@ -4,7 +4,7 @@ Want to see this app in action? You're in luck! It has been deployed at: <b>http
 ### Poke A Square
 
 - We're going to make a game that looks like the following:
-
+  
 ![squareGame](squareGame.png)
 
 - The objective of our game is to click on as many blue squares as possible during the alloted time
